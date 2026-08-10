@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#F7DCD4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- SEO & Open Graph -->
+  <title>For Pratiksha 💛 | Raksha Bandhan 2026</title>
+  <meta name="description"
+    content="A heartfelt Raksha Bandhan gift — 21 years of love, memories, and an unbreakable thread.">
+  <meta property="og:title" content="A gift for Pratiksha 💛">
+  <meta property="og:description" content="Happy Raksha Bandhan — with love, from Siddheshwar">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/og-preview.jpg">
+
+  <!-- Fonts (preconnect for speed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/memories.css">
+  <link rel="stylesheet" href="css/finale.css">
+
+  <!-- Three.js for 3D Rakhi Render -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════
+       GLOBAL LAYERS
+       ═══════════════════════════════ -->
+
+  <!-- Floating golden particles -->
+  <div id="particles-container" aria-hidden="true"
+    style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;transition:opacity 1s ease;">
+  </div>
+
+  <!-- Canvas for continuous diagonal falling pink petals (virat-anushka style) -->
+  <canvas id="leaf-canvas" aria-hidden="true" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99;"></canvas>
+
+  <!-- Tap-spread star burst layer -->
+  <div id="stars-tap-container" aria-hidden="true" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></div>
+
+  <!-- Mute Toggle -->
+  <button id="mute-toggle" aria-label="Toggle music">🔊</button>
+
+
+  <!-- ═══════════════════════════════
+       PAGE 1 — LANDING
+       ═══════════════════════════════ -->
+  <section id="landing" class="screen active" aria-label="Welcome">
+
+    <!-- Soft light blobs -->
+    <div class="light-blobs" aria-hidden="true">
+      <div class="light-blob light-blob--1"></div>
+      <div class="light-blob light-blob--2"></div>
+      <div class="light-blob light-blob--3"></div>
+      <div class="light-blob light-blob--4"></div>
+    </div>
+
+    <!-- 3D Ribbon (behind rakhi) -->
+    <div id="ribbon-container" aria-hidden="true"></div>
+
+    <!-- Interactive 3D Canvas Rakhi -->
+    <div id="rakhi-3d-container"></div>
+
+    <!-- Hero Text -->
+    <h1 class="hero-name font-display">Pratiksha</h1>
+    <p class="hero-subtitle font-marathi">ताई, तुझ्यासाठी…</p>
+
+    <!-- Tap to Begin -->
+    <button id="tap-to-begin" aria-label="Begin the experience">
+      tap to begin ✦
+    </button>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       PAGES 2–9 — MEMORIES
+       ═══════════════════════════════ -->
+  <section id="memories" class="screen" aria-label="Memories">
+
+    <!-- Carousel (cards injected by JS) -->
+    <div class="carousel-container"></div>
+
+    <!-- Navigation Arrows (always visible on mobile) -->
+    <button class="carousel-arrow carousel-arrow--left" aria-label="Previous memory">‹</button>
+    <button class="carousel-arrow carousel-arrow--right" aria-label="Next memory">›</button>
+
+    <!-- Page Dots -->
+    <div class="page-dots" aria-label="Memory navigation"></div>
+
+    <!-- Counter -->
+    <div class="memory-counter font-handwritten" aria-hidden="true">1 / 8</div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       FINAL PAGE — 21 YEARS, US
+       ═══════════════════════════════ -->
+  <section id="finale" class="screen" aria-label="21 Years">
+
+    <!-- Year Counter -->
+    <div class="year-counter">
+      <div class="year-counter-number font-display">0</div>
+      <div class="year-counter-label font-handwritten">years of us</div>
+    </div>
+
+    <!-- Spiral Stage Container -->
+    <div class="spiral-stage">
+      <!-- Spiral Canvas -->
+      <canvas id="spiral-canvas" aria-hidden="true"></canvas>
+
+      <!-- Tap target over heart-knot -->
+      <div id="spiral-tap-target" role="button" aria-label="Tap the heart to reveal the final message" tabindex="0"></div>
+    </div>
+
+    <!-- Back Button -->
+    <button id="back-to-memories" aria-label="Back to memories">← Home</button>
+
+    <!-- Finale Content -->
+    <div class="finale-content">
+
+      <!-- Thank You Didi Summary -->
+      <div class="thank-you-section">
+        <h2 class="thank-you-heading font-display">
+          <span class="emoji-rakhi">💖</span> Thank You, Didi! (दीदी)
+        </h2>
+
+        <!-- Closing paragraphs (populated by JS) -->
+        <p class="closing-text-en"></p>
+        <div class="gold-thread" style="margin: 1rem auto;"></div>
+        <p class="closing-text-mr font-marathi"></p>
+      </div>
+
+      <!-- Precious Birthday Wish Card -->
+      <div class="birthday-wish-card">
+        <div class="birthday-badge font-handwritten">🎂 Special Wish for You ✨</div>
+        <h3 class="birthday-title font-display">Happy Birthday, Pratiksha Didi! 🎉</h3>
+        <p class="birthday-text-en">
+          To the most precious sister in the world — May your day and year ahead be filled with infinite laughter, love, health, and peace. Thank you for being my light and my strength. Wishing you the happiest birthday ever! 💖
+        </p>
+        <div class="gold-thread" style="margin: 0.8rem auto; width: 40%;"></div>
+        <p class="birthday-text-mr font-marathi">
+          जगातील सर्वात लाडक्या दीदीला वाढदिवसाच्या आणि रक्षाबंधनाच्या अनंत शुभेच्छा! तुझं आयुष्य नेहमी हसू, प्रेम आणि यशाने भरलेलं राहो! 🌸✨
+        </p>
+      </div>
+
+      <!-- Signature -->
+      <div class="finale-signature">
+        <div class="finale-names font-display">Siddheshwar & Pratiksha</div>
+
+        <p class="finale-family">
+          With love from our home —<br>
+          Ravindra, Thakubai, Sandeep & little Sarvadnya 💛
+        </p>
+
+        <p class="finale-date font-handwritten">Raksha Bandhan & Birthday 2026</p>
+      </div>
+    </div>
+
+    <!-- Petals (injected by JS) -->
+    <div id="petals-container" aria-hidden="true"></div>
+
+    <!-- Happy Raksha Bandhan & Birthday (revealed after petals) -->
+    <div id="happy-rb">
+      <p class="happy-rb-en font-display">Happy Birthday & Raksha Bandhan!</p>
+      <p class="happy-rb-mr font-marathi">वाढदिवस व रक्षाबंधनाच्या हार्दिक शुभेच्छा! 🎂🌸</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       SCRIPTS (order matters)
+       ═══════════════════════════════ -->
+  <script src="js/haptics.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/ribbon.js"></script>
+  <script src="js/carousel.js"></script>
+  <script src="js/spiral.js"></script>
+  <script src="js/petals.js"></script>
+  <script src="js/rakhi3d.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>

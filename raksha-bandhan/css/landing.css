@@ -1,0 +1,240 @@
+/* ===================================
+   Soft Dhaaga — Landing Page
+   =================================== */
+
+#landing {
+  background: linear-gradient(
+    160deg,
+    var(--blush-petal) 0%,
+    #f5d8ce 30%,
+    var(--warm-sand) 70%,
+    #ebe0d0 100%
+  );
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Light Blobs ── */
+.light-blobs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.light-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.light-blob--1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(var(--dusty-rose-rgb), 0.2) 0%, transparent 70%);
+  top: -5%;
+  right: -10%;
+  animation: blobBreathe 8s ease-in-out infinite;
+}
+
+.light-blob--2 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(var(--sage-mist-rgb), 0.15) 0%, transparent 70%);
+  bottom: 10%;
+  left: -8%;
+  animation: blobBreathe2 10s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.light-blob--3 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(var(--muted-gold-rgb), 0.1) 0%, transparent 70%);
+  top: 40%;
+  right: 20%;
+  animation: blobBreathe 12s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.light-blob--4 {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(var(--blush-petal-rgb), 0.25) 0%, transparent 70%);
+  bottom: -5%;
+  right: 30%;
+  animation: blobBreathe2 9s ease-in-out infinite;
+  animation-delay: -7s;
+}
+
+/* ── Interactive 3D Canvas Rakhi ── */
+#rakhi-3d-container {
+  position: relative;
+  z-index: 3;
+  width: clamp(260px, 75vw, 340px);
+  height: clamp(240px, 60vw, 300px);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  animation: heroReveal 1.5s var(--ease-out) forwards;
+  animation-delay: 0.2s;
+  cursor: grab;
+  touch-action: none;
+}
+
+#rakhi-3d-container:active {
+  cursor: grabbing;
+}
+
+#rakhi-3d-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: auto;
+}
+
+/* ── Ribbon Container (behind rakhi) ── */
+#ribbon-container {
+  position: absolute;
+  width: 90%;
+  max-width: 360px;
+  height: 200px;
+  perspective: 800px;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  touch-action: none;
+  opacity: 0.4;
+}
+
+.ribbon-segment {
+  position: absolute;
+  width: 100%;
+  height: 28px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--muted-gold-rgb), 0.7) 0%,
+    rgba(var(--dusty-rose-rgb), 0.5) 40%,
+    rgba(var(--muted-gold-rgb), 0.6) 70%,
+    rgba(var(--dusty-rose-rgb), 0.4) 100%
+  );
+  background-size: 200% 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow:
+    0 2px 8px rgba(var(--deep-plum-rgb), 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: ribbonUndulate var(--ribbon-duration, 6s) var(--ease-silk) infinite;
+  animation-delay: var(--ribbon-delay, 0s);
+  transition: transform 0.15s var(--ease-smooth);
+  will-change: transform;
+}
+
+/* Thread texture overlay */
+.ribbon-segment::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(255, 255, 255, 0.06) 3px,
+    rgba(255, 255, 255, 0.06) 4px
+  );
+}
+
+/* Shimmer sweep */
+.ribbon-segment::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 45%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.15) 55%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: ribbonShimmer 4s ease-in-out infinite;
+  animation-delay: var(--ribbon-delay, 0s);
+}
+
+/* Ribbon unravel-out transition */
+#ribbon-container.unraveling .ribbon-segment {
+  transition: transform 1s var(--ease-smooth), opacity 0.8s var(--ease-smooth);
+  transform: translateX(120vw) rotateZ(45deg) !important;
+  opacity: 0;
+}
+
+/* ── Hero Text ── */
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 11vw, 5rem);
+  font-weight: 400;
+  color: var(--deep-plum);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+  animation: heroReveal 1.2s var(--ease-out) forwards;
+  animation-delay: 0.5s;
+}
+
+.hero-subtitle {
+  font-family: var(--font-marathi);
+  font-size: clamp(1rem, 4vw, 1.4rem);
+  color: var(--deep-plum);
+  opacity: 0;
+  margin-top: var(--space-sm);
+  z-index: 2;
+  animation: subtitleReveal 1s var(--ease-out) forwards;
+  animation-delay: 1.2s;
+}
+
+/* ── Tap to Begin ── */
+#tap-to-begin {
+  margin-top: var(--space-2xl);
+  font-family: var(--font-handwritten);
+  font-size: 1.2rem;
+  color: var(--deep-plum);
+  opacity: 0;
+  z-index: 2;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: 30px;
+  background: rgba(var(--warm-sand-rgb), 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--muted-gold-rgb), 0.2);
+  animation:
+    subtitleReveal 0.8s var(--ease-out) 2s forwards,
+    pulse 2.5s ease-in-out 2.8s infinite;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+#tap-to-begin:active {
+  transform: scale(0.95);
+  background: rgba(var(--warm-sand-rgb), 0.7);
+}
+
+/* ── Landing fade-out state ── */
+#landing.exiting {
+  transition: opacity 1s var(--ease-smooth);
+  opacity: 0;
+  pointer-events: none;
+}

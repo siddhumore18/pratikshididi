@@ -1,0 +1,247 @@
+/* ===================================
+   Soft Dhaaga — Design System
+   Raksha Bandhan 2026 for Pratiksha
+   =================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Poppins:ital,wght@0,300;0,400;0,500;1,300&family=Tiro+Devanagari+Marathi:ital@0;1&family=Caveat:wght@400;500&display=swap');
+
+/* ── Design Tokens ── */
+:root {
+  /* Soft Dhaaga Palette */
+  --blush-petal: #F7DCD4;
+  --warm-sand: #EDE3D3;
+  --sage-mist: #B9C9AE;
+  --dusty-rose: #D98E8E;
+  --deep-plum: #4A3540;
+  --muted-gold: #CBA35C;
+
+  /* RGB variants for rgba() usage */
+  --blush-petal-rgb: 247, 220, 212;
+  --warm-sand-rgb: 237, 227, 211;
+  --muted-gold-rgb: 203, 163, 92;
+  --dusty-rose-rgb: 217, 142, 142;
+  --deep-plum-rgb: 74, 53, 64;
+  --sage-mist-rgb: 185, 201, 174;
+
+  /* Typography Scale */
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Poppins', 'Segoe UI', sans-serif;
+  --font-marathi: 'Tiro Devanagari Marathi', serif;
+  --font-handwritten: 'Caveat', cursive;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Easing */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-silk: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Transitions */
+  --transition-fast: 200ms var(--ease-smooth);
+  --transition-normal: 400ms var(--ease-smooth);
+  --transition-slow: 800ms var(--ease-smooth);
+  --transition-reveal: 1200ms var(--ease-out);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--deep-plum);
+  background-color: var(--blush-petal);
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100dvh;
+  height: 100vh; /* fallback */
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── Typography Utilities ── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-marathi {
+  font-family: var(--font-marathi);
+}
+
+.font-handwritten {
+  font-family: var(--font-handwritten);
+}
+
+/* ── Screen System ── */
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 800ms var(--ease-smooth), visibility 0s linear 800ms;
+  will-change: opacity;
+  overflow: hidden;
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 800ms var(--ease-smooth), visibility 0s linear 0s;
+}
+
+/* ── Common Elements ── */
+::selection {
+  background: rgba(var(--dusty-rose-rgb), 0.3);
+  color: var(--deep-plum);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--dusty-rose);
+  outline-offset: 2px;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+canvas {
+  display: block;
+}
+
+/* ── Gold Thread Divider ── */
+.gold-thread {
+  width: 60%;
+  max-width: 200px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--muted-gold-rgb), 0.3) 20%,
+    var(--muted-gold) 50%,
+    rgba(var(--muted-gold-rgb), 0.3) 80%,
+    transparent 100%
+  );
+  margin: var(--space-md) auto;
+  position: relative;
+}
+
+.gold-thread::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--muted-gold-rgb), 0.15),
+    transparent
+  );
+  filter: blur(2px);
+}
+
+/* ── Mute Toggle ── */
+#mute-toggle {
+  position: fixed;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(var(--warm-sand-rgb), 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  opacity: 0;
+  transition: opacity var(--transition-normal), transform var(--transition-fast);
+  pointer-events: none;
+}
+
+#mute-toggle.visible {
+  opacity: 0.7;
+  pointer-events: auto;
+}
+
+#mute-toggle:active {
+  transform: scale(0.9);
+}
+
+/* ── Accessibility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

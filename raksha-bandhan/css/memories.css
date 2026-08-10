@@ -1,0 +1,352 @@
+/* ===================================
+   Soft Dhaaga — Memory Cards
+   =================================== */
+
+#memories {
+  background: linear-gradient(
+    170deg,
+    var(--warm-sand) 0%,
+    var(--blush-petal) 50%,
+    #f0ddd5 100%
+  );
+}
+
+/* ── Carousel Container ── */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+/* ── Memory Card ── */
+.memory-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Flow top-down for scrollability */
+  padding: var(--space-md) var(--space-sm);
+  padding-top: max(40px, calc(env(safe-area-inset-top, 16px) + 20px));
+  padding-bottom: max(75px, calc(env(safe-area-inset-bottom, 20px) + 50px));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.memory-card.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Transition classes */
+.memory-card.enter-from-right {
+  animation: cardEnterRight 500ms var(--ease-smooth) forwards;
+}
+
+.memory-card.exit-to-left {
+  animation: cardExitLeft 500ms var(--ease-smooth) forwards;
+  pointer-events: none;
+}
+
+.memory-card.enter-from-left {
+  animation: cardEnterLeft 500ms var(--ease-smooth) forwards;
+}
+
+.memory-card.exit-to-right {
+  animation: cardExitRight 500ms var(--ease-smooth) forwards;
+  pointer-events: none;
+}
+
+/* Auto-advance peek */
+.memory-card.peeking {
+  animation: cardPeek 1.5s var(--ease-smooth);
+}
+
+/* ── Photo Frame ── */
+.memory-photo-wrapper {
+  position: relative;
+  width: 68%;
+  max-width: 240px;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow:
+    0 4px 20px rgba(var(--deep-plum-rgb), 0.1),
+    0 1px 4px rgba(var(--deep-plum-rgb), 0.06);
+  margin-top: 2px;
+}
+
+/* Hand-drawn border overlay */
+.memory-photo-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 2px dashed rgba(var(--muted-gold-rgb), 0.35);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.memory-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: photoZoom 800ms var(--ease-smooth) forwards;
+  transition: transform 0.1s linear;
+  filter: saturate(0.95) contrast(1.02);
+}
+
+/* Photo placeholder (when no image yet) */
+.memory-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-handwritten);
+  font-size: 1.2rem;
+  color: rgba(var(--deep-plum-rgb), 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--warm-sand-rgb), 0.5),
+    rgba(var(--blush-petal-rgb), 0.5)
+  );
+}
+
+/* ── Handwritten Caption (Year/Note) ── */
+.memory-year {
+  font-family: var(--font-handwritten);
+  font-size: 1.15rem;
+  color: rgba(var(--deep-plum-rgb), 0.7);
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xs);
+  flex-shrink: 0;
+}
+
+/* ── Text Content ── */
+.memory-text {
+  width: 90%;
+  max-width: 350px;
+  text-align: center;
+  margin-top: var(--space-xs);
+  padding-bottom: var(--space-md);
+  flex-shrink: 0;
+}
+
+.memory-caption-en {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(0.92rem, 3.8vw, 1.05rem);
+  line-height: 1.75;
+  color: var(--deep-plum);
+  margin-bottom: var(--space-xs);
+}
+
+/* Gold thread divider inside card */
+.memory-divider {
+  width: 50%;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--muted-gold-rgb), 0.4) 30%,
+    var(--muted-gold) 50%,
+    rgba(var(--muted-gold-rgb), 0.4) 70%,
+    transparent 100%
+  );
+  margin: var(--space-xs) auto;
+}
+
+.memory-caption-mr {
+  font-family: var(--font-marathi);
+  font-style: italic;
+  font-size: clamp(0.86rem, 3.4vw, 0.98rem);
+  line-height: 1.8;
+  color: rgba(var(--deep-plum-rgb), 0.85);
+}
+
+/* ── Navigation Arrows — ALIGNED WITH PHOTO FRAME (NO TEXT OVERLAP) ── */
+.carousel-arrow {
+  position: absolute;
+  top: max(135px, 25vh);
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--deep-plum);
+  background: rgba(var(--warm-sand-rgb), 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--muted-gold-rgb), 0.2);
+  z-index: 10;
+  opacity: 1;
+  transition: transform var(--transition-fast), opacity var(--transition-fast), background var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(var(--deep-plum-rgb), 0.1);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.88);
+  background: rgba(var(--warm-sand-rgb), 0.9);
+}
+
+.carousel-arrow--left {
+  left: 8px;
+}
+
+.carousel-arrow--right {
+  right: 8px;
+}
+
+/* Hide left arrow on first card, hide right on last */
+.carousel-arrow.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Swipe Hint (mobile) ── */
+.swipe-hint {
+  position: absolute;
+  bottom: calc(max(20px, env(safe-area-inset-bottom, 20px)) + 48px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-handwritten);
+  font-size: 0.85rem;
+  color: rgba(var(--deep-plum-rgb), 0.35);
+  z-index: 10;
+  white-space: nowrap;
+  animation: fadeIn 0.8s ease forwards, fadeOut 1s ease 4s forwards;
+  pointer-events: none;
+}
+
+.swipe-hint-arrow {
+  display: inline-block;
+  animation: swipeHintBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes swipeHintBounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+/* ── Page Dots ── */
+.page-dots {
+  position: absolute;
+  bottom: max(20px, env(safe-area-inset-bottom, 20px));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(var(--warm-sand-rgb), 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.page-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(var(--deep-plum-rgb), 0.15);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.page-dot.active {
+  background: var(--dusty-rose);
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(var(--dusty-rose-rgb), 0.4);
+}
+
+/* ── Memory Counter ── */
+.memory-counter {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top, 16px));
+  right: 60px;
+  font-family: var(--font-handwritten);
+  font-size: 0.9rem;
+  color: rgba(var(--deep-plum-rgb), 0.35);
+  z-index: 10;
+}
+
+/* ── 9th Thank You Card Box ── */
+.thank-you-card-box {
+  width: 90%;
+  max-width: 350px;
+  padding: var(--space-xl) var(--space-lg);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(var(--warm-sand-rgb), 0.65), rgba(var(--blush-petal-rgb), 0.7));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(var(--muted-gold-rgb), 0.25);
+  box-shadow: 0 8px 32px rgba(var(--deep-plum-rgb), 0.12);
+  text-align: center;
+  margin: auto;
+}
+
+.big-thankyou-title {
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  color: var(--deep-plum);
+  margin-top: var(--space-xs);
+  margin-bottom: 2px;
+  font-weight: 400;
+}
+
+.big-thankyou-subtitle {
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  color: var(--dusty-rose);
+  margin-bottom: var(--space-sm);
+}
+
+.thankyou-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.btn-back-start,
+.btn-goto-finale {
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-size: 1.05rem;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-back-start {
+  background: rgba(var(--warm-sand-rgb), 0.7);
+  color: var(--deep-plum);
+  border: 1px solid rgba(var(--deep-plum-rgb), 0.2);
+}
+
+.btn-goto-finale {
+  background: var(--dusty-rose);
+  color: #fff;
+  border: 1px solid var(--dusty-rose);
+  box-shadow: 0 2px 10px rgba(var(--dusty-rose-rgb), 0.3);
+}
+
+.btn-back-start:active,
+.btn-goto-finale:active {
+  transform: scale(0.93);
+}

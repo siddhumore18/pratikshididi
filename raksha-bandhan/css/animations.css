@@ -1,0 +1,359 @@
+/* ===================================
+   Soft Dhaaga — Keyframe Animations
+   =================================== */
+
+/* ── Landing Page ── */
+
+/* Tap-to-begin pulse */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Hero name fade in and float up */
+@keyframes heroReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtitle fade in (delayed) */
+@keyframes subtitleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}
+
+/* Light blob breathing */
+@keyframes blobBreathe {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.15;
+  }
+  33% {
+    transform: scale(1.1) translate(5%, -3%);
+    opacity: 0.2;
+  }
+  66% {
+    transform: scale(0.95) translate(-3%, 5%);
+    opacity: 0.12;
+  }
+}
+
+@keyframes blobBreathe2 {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.12;
+  }
+  50% {
+    transform: scale(1.15) translate(-4%, 4%);
+    opacity: 0.18;
+  }
+}
+
+/* ── Ribbon ── */
+
+@keyframes ribbonUndulate {
+  0% {
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg)) translateZ(var(--tz, 0));
+  }
+  25% {
+    transform: rotateX(calc(var(--rx, 0deg) + 3deg)) rotateY(calc(var(--ry, 0deg) - 2deg)) rotateZ(calc(var(--rz, 0deg) + 1deg)) translateZ(calc(var(--tz, 0px) + 5px));
+  }
+  50% {
+    transform: rotateX(calc(var(--rx, 0deg) - 2deg)) rotateY(calc(var(--ry, 0deg) + 3deg)) rotateZ(calc(var(--rz, 0deg) - 1deg)) translateZ(var(--tz, 0));
+  }
+  75% {
+    transform: rotateX(calc(var(--rx, 0deg) + 1deg)) rotateY(calc(var(--ry, 0deg) - 1deg)) rotateZ(calc(var(--rz, 0deg) + 2deg)) translateZ(calc(var(--tz, 0px) + 3px));
+  }
+  100% {
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg)) translateZ(var(--tz, 0));
+  }
+}
+
+@keyframes ribbonShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* ── Particles ── */
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: var(--p-opacity, 0.4);
+  }
+  25% {
+    transform: translateY(-25vh) translateX(calc(var(--p-drift, 10px))) scale(0.8);
+  }
+  50% {
+    transform: translateY(-50vh) translateX(calc(var(--p-drift, 10px) * -0.5)) scale(1.1);
+    opacity: calc(var(--p-opacity, 0.4) * 1.2);
+  }
+  75% {
+    transform: translateY(-75vh) translateX(calc(var(--p-drift, 10px) * 0.8)) scale(0.9);
+  }
+  100% {
+    transform: translateY(-100vh) translateX(0) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes particleGlow {
+  0%, 100% {
+    box-shadow: 0 0 2px rgba(var(--muted-gold-rgb), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 6px rgba(var(--muted-gold-rgb), 0.6);
+  }
+}
+
+/* ── Memory Cards ── */
+
+@keyframes cardEnterRight {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) translateX(100%) rotateY(-15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) translateX(0) rotateY(0deg);
+  }
+}
+
+@keyframes cardExitLeft {
+  0% {
+    opacity: 1;
+    transform: perspective(1000px) translateX(0) rotateY(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(1000px) translateX(-100%) rotateY(15deg);
+  }
+}
+
+@keyframes cardEnterLeft {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) translateX(-100%) rotateY(15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) translateX(0) rotateY(0deg);
+  }
+}
+
+@keyframes cardExitRight {
+  0% {
+    opacity: 1;
+    transform: perspective(1000px) translateX(0) rotateY(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(1000px) translateX(100%) rotateY(-15deg);
+  }
+}
+
+@keyframes cardPeek {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-20px);
+  }
+}
+
+/* Photo subtle zoom on card enter */
+@keyframes photoZoom {
+  0% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ── Finale ── */
+
+/* Heart-knot pulse */
+@keyframes heartPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(var(--dusty-rose-rgb), 0.3));
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 16px rgba(var(--dusty-rose-rgb), 0.5));
+  }
+}
+
+/* Petal fall */
+@keyframes petalFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) translateX(var(--petal-x, 0px)) rotate(var(--petal-start-rot, 0deg)) scale(0.3);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0) translateX(var(--petal-x, 0px)) rotate(calc(var(--petal-start-rot, 0deg) + 20deg)) scale(1);
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(var(--petal-fall-distance, 80vh)) translateX(calc(var(--petal-x, 0px) + var(--petal-drift, 30px))) rotate(calc(var(--petal-start-rot, 0deg) + var(--petal-end-rot, 180deg))) scale(0.6);
+  }
+}
+
+/* Final message reveal */
+@keyframes finalReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Year counter number pop */
+@keyframes yearPop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-10deg);
+  }
+  60% {
+    transform: scale(1.2) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ── Utility Animations ── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Gentle rotation for decorative elements */
+@keyframes gentleRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Stars ── */
+
+/* Background star twinkle */
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Tap star burst outward */
+@keyframes tapStarBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+    transform: translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5)) scale(1.3);
+  }
+  100% {
+    transform: translate(var(--end-x), var(--end-y)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Continuous dropping stars & petals animation (like virat-anushka site) */
+@keyframes continuousDrop {
+  0% {
+    top: -40px;
+    transform: translateX(0) rotate(var(--rot-start, 0deg));
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(var(--drift-x, 30px)) rotate(calc(var(--rot-start, 0deg) + 180deg));
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    top: 105vh;
+    transform: translateX(calc(var(--drift-x, 30px) * -0.5)) rotate(var(--rot-end, 360deg));
+    opacity: 0;
+  }
+}
