@@ -184,11 +184,15 @@ window.SoftDhaaga.App = (function () {
   }
 
   function goBackToMemories() {
-    switchScreen('landing');
-    const ribbonContainer = document.getElementById('ribbon-container');
-    if (ribbonContainer) {
-      ribbonContainer.classList.remove('unraveling');
+    var landingSec = document.getElementById('landing');
+    if (landingSec) {
+      landingSec.classList.remove('exiting');
+      landingSec.style.opacity = '';
     }
+    if (SoftDhaaga.Ribbon && SoftDhaaga.Ribbon.reset) {
+      SoftDhaaga.Ribbon.reset();
+    }
+    switchScreen('landing');
     if (SoftDhaaga.Haptics) SoftDhaaga.Haptics.soft();
   }
 

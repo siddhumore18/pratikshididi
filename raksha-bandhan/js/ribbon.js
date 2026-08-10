@@ -222,9 +222,21 @@ window.SoftDhaaga.Ribbon = (function () {
     segments = [];
   }
 
+  function reset() {
+    if (container) {
+      container.classList.remove('unraveling');
+    }
+    segments.forEach(function (s) {
+      s.el.style.transitionDelay = '0s';
+      s.el.style.transform = '';
+      s.el.style.opacity = '';
+    });
+  }
+
   return {
     init: init,
     unravel: unravel,
+    reset: reset,
     destroy: destroy,
   };
 })();
