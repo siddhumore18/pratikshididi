@@ -41,9 +41,9 @@ window.SoftDhaaga.App = (function () {
     {
       image: 'images/memories/memory-4.jpeg',
       captionEn:
-        "Baba — Ravindra — taught us the strength to stand on our own. Aai — Thakubai — taught us the warmth of standing together. Whatever good we carry within us today has, in some way, begun with them. We are a reflection of the love and values they gave us.",
+        "Nana taught us the strength to stand on our own. Aai taught us the warmth of standing together. Whatever good we carry within us today has, in some way, begun with them. We are a reflection of the love and values they gave us.",
       captionMr:
-        "बाबा — रवींद्र — यांनी स्वतःच्या पायावर खंबीरपणे उभं राहायला शिकवलं. आई — ठकूबाई — यांनी मात्र एकमेकांच्या पाठीशी उभं राहण्याची ताकद दिली. आज आपल्यात जे काही चांगलं आहे, त्याची मुळं कुठेतरी त्यांच्याच संस्कारांत आहेत. त्यांनी दिलेलं प्रेम आणि शिकवण आपण आजही आपल्या आयुष्यात जपत आहोत.",
+        "बाबानी स्वतःच्या पायावर खंबीरपणे उभं राहायला शिकवलं. आई न एकमेकांच्या पाठीशी उभं राहण्याची ताकद दिली. आज आपल्यात जे काही चांगलं आहे, त्याची मुळं कुठेतरी त्यांच्याच संस्कारांत आहेत. त्यांनी दिलेलं प्रेम आणि शिकवण आपण आजही आपल्या आयुष्यात जपत आहोत.",
       year: 'Everything began with them ✦',
     },
 
